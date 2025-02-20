@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrepMaster - Your Government Exam Companion</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .quiz-card {
+            transition: transform 0.3s ease;
+        }
+        .quiz-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold">PrepMaster</h1>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="hover:text-blue-200">Home</a>
+                    <a href="#topics" class="hover:text-blue-200">Topics</a>
+                    <a href="#quizzes" class="hover:text-blue-200">Quizzes</a>
+                    <a href="#resources" class="hover:text-blue-200">Resources</a>
+                </div>
+                <button class="md:hidden" onclick="toggleMenu()">
+                    <i class="bi bi-list text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden">
+            <div class="px-4 py-3 space-y-2">
+                <a href="#home" class="block hover:text-blue-200">Home</a>
+                <a href="#topics" class="block hover:text-blue-200">Topics</a>
+                <a href="#quizzes" class="block hover:text-blue-200">Quizzes</a>
+                <a href="#resources" class="block hover:text-blue-200">Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-blue-50 py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Prepare for Government Exams</h1>
+                <p class="text-lg text-gray-600 mb-8">Comprehensive study material and practice tests for all major government examinations</p>
+                <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition">Start Learning</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Topics Section -->
+    <section id="topics" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Popular Topics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <i class="bi bi-book text-3xl text-blue-600"></i>
+                    <h3 class="text-xl font-semibold mt-4">General Knowledge</h3>
+                    <p class="text-gray-600 mt-2">Current affairs, history, geography, and more</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <i class="bi bi-calculator text-3xl text-blue-600"></i>
+                    <h3 class="text-xl font-semibold mt-4">Quantitative Aptitude</h3>
+                    <p class="text-gray-600 mt-2">Mathematics, numerical ability, and data interpretation</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <i class="bi bi-lightbulb text-3xl text-blue-600"></i>
+                    <h3 class="text-xl font-semibold mt-4">Reasoning</h3>
+                    <p class="text-gray-600 mt-2">Logical and analytical reasoning</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quizzes" class="bg-gray-100 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Practice Tests</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="quiz-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">General Knowledge Quiz</h3>
+                    <p class="text-gray-600 mb-4">Test your knowledge with 20 questions</p>
+                    <button onclick="startQuiz('gk')" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Start Quiz</button>
+                </div>
+                <div class="quiz-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Mathematics Quiz</h3>
+                    <p class="text-gray-600 mb-4">Practice with 15 numerical problems</p>
+                    <button onclick="startQuiz('math')" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Start Quiz</button>
+                </div>
+                <div class="quiz-card bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Reasoning Quiz</h3>
+                    <p class="text-gray-600 mb-4">Solve 25 logical reasoning questions</p>
+                    <button onclick="startQuiz('reasoning')" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Start Quiz</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg max-w-2xl w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="quizTitle" class="text-2xl font-bold"></h3>
+                <button onclick="closeQuiz()" class="text-gray-600 hover:text-gray-800">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div id="quizContent" class="mb-6"></div>
+            <div id="quizNavigation" class="flex justify-between">
+                <button onclick="previousQuestion()" class="bg-gray-200 text-gray-800 px-6 py-2 rounded hover:bg-gray-300 transition">Previous</button>
+                <button onclick="nextQuestion()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Quiz functionality
+        let currentQuiz = null;
+        let currentQuestion = 0;
+        let userAnswers = [];
+
+        const quizzes = {
+            gk: {
+                title: "General Knowledge Quiz",
+                questions: [
+                    {
+                        question: "What is the capital of India?",
+                        options: ["Mumbai", "New Delhi", "Kolkata", "Chennai"],
+                        correct: 1
+                    },
+                    {
+                        question: "Who wrote the Indian National Anthem?",
+                        options: ["Rabindranath Tagore", "Bankim Chandra", "Sarojini Naidu", "Mahatma Gandhi"],
+                        correct: 0
+                    }
+                    // Add more questions as needed
+                ]
+            },
+            math: {
+                title: "Mathematics Quiz",
+                questions: [
+                    {
+                        question: "What is 15% of 200?",
+                        options: ["20", "25", "30", "35"],
+                        correct: 2
+                    },
+                    {
+                        question: "If a train travels 300 km in 4 hours, what is its speed?",
+                        options: ["65 km/h", "70 km/h", "75 km/h", "80 km/h"],
+                        correct: 2
+                    }
+                    // Add more questions as needed
+                ]
+            },
+            reasoning: {
+                title: "Reasoning Quiz",
+                questions: [
+                    {
+                        question: "Complete the series: 2, 4, 8, 16, __",
+                        options: ["24", "32", "30", "28"],
+                        correct: 1
+                    },
+                    {
+                        question: "If ROAD is coded as URDG, then how is SWAN coded?",
+                        options: ["VZDQ", "VZCQ", "VZCP", "VZAP"],
+                        correct: 0
+                    }
+                    // Add more questions as needed
+                ]
+            }
+        };
+
+        function startQuiz(type) {
+            currentQuiz = type;
+            currentQuestion = 0;
+            userAnswers = new Array(quizzes[type].questions.length).fill(null);
+            document.getElementById('quizModal').classList.remove('hidden');
+            document.getElementById('quizTitle').textContent = quizzes[type].title;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = quizzes[currentQuiz].questions[currentQuestion];
+            let html = `
+                <div class="mb-4">
+                    <p class="text-lg mb-4">${currentQuestion + 1}. ${question.question}</p>
+                    <div class="space-y-2">
+            `;
+            
+            question.options.forEach((option, index) => {
+                html += `
+                    <div class="flex items-center">
+                        <input type="radio" name="answer" value="${index}" 
+                            ${userAnswers[currentQuestion] === index ? 'checked' : ''}
+                            class="mr-2" onclick="saveAnswer(${index})">
+                        <label>${option}</label>
+                    </div>
+                `;
+            });
+
+            html += `</div></div>`;
+            document.getElementById('quizContent').innerHTML = html;
+        }
+
+        function saveAnswer(index) {
+            userAnswers[currentQuestion] = index;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizzes[currentQuiz].questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function showResults() {
+            let correct = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === quizzes[currentQuiz].questions[index].correct) {
+                    correct++;
+                }
+            });
+
+            const percentage = (correct / quizzes[currentQuiz].questions.length) * 100;
+            
+            document.getElementById('quizContent').innerHTML = `
+                <div class="text-center">
+                    <h3 class="text-xl font-bold mb-4">Quiz Complete!</h3>
+                    <p class="text-lg mb-2">You got ${correct} out of ${quizzes[currentQuiz].questions.length} correct</p>
+                    <p class="text-lg mb-4">Score: ${percentage.toFixed(2)}%</p>
+                    <button onclick="closeQuiz()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Close</button>
+                </div>
+            `;
+            
+            document.getElementById('quizNavigation').style.display = 'none';
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizModal').classList.add('hidden');
+            document.getElementById('quizNavigation').style.display = 'flex';
+        }
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
